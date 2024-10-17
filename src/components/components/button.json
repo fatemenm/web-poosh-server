@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_components_buttons",
+  "info": {
+    "displayName": "Button",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "buttonText": {
+      "type": "string",
+      "required": false
+    },
+    "hasIcon": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "iconName": {
+      "type": "string",
+      "required": false
+    }
+  }
+}
