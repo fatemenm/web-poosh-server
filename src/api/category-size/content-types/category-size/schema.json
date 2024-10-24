@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "sub_categories",
+  "collectionName": "category_sizes",
   "info": {
-    "singularName": "sub-category",
-    "pluralName": "sub-categories",
-    "displayName": "SubCategory",
+    "singularName": "category-size",
+    "pluralName": "category-sizes",
+    "displayName": "CategorySize",
     "description": ""
   },
   "options": {
@@ -12,15 +12,15 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
-      "type": "string",
-      "required": true,
-      "unique": true
-    },
     "category_id": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::category.category"
+    },
+    "size_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::size.size"
     }
   }
 }

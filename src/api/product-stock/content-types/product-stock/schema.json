@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_stocks",
+  "info": {
+    "singularName": "product-stock",
+    "pluralName": "product-stocks",
+    "displayName": "ProductStock",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "product_variety_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product-variety.product-variety"
+    },
+    "size_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::size.size"
+    },
+    "stockQuantity": {
+      "required": true,
+      "type": "integer"
+    }
+  }
+}

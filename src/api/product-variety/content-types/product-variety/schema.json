@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_varieties",
+  "info": {
+    "singularName": "product-variety",
+    "pluralName": "product-varieties",
+    "displayName": "ProductVariety",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "product_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product"
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "color_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::color.color"
+    }
+  }
+}

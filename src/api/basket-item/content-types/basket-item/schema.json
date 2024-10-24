@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "basket_items",
+  "info": {
+    "singularName": "basket-item",
+    "pluralName": "basket-items",
+    "displayName": "BasketItem",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "product_variety_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product-variety.product-variety"
+    },
+    "size_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::size.size"
+    },
+    "itemQuantity": {
+      "type": "integer",
+      "required": true
+    }
+  }
+}

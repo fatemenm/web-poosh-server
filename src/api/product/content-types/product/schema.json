@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "sub_categories",
+  "collectionName": "products",
   "info": {
-    "singularName": "sub-category",
-    "pluralName": "sub-categories",
-    "displayName": "SubCategory",
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product",
     "description": ""
   },
   "options": {
@@ -14,13 +14,17 @@
   "attributes": {
     "name": {
       "type": "string",
-      "required": true,
-      "unique": true
+      "required": true
     },
     "category_id": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::category.category"
+    },
+    "sub_category_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::sub-category.sub-category"
     }
   }
 }
