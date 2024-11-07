@@ -499,8 +499,8 @@ export interface ApiBannerBanner extends Struct.CollectionTypeSchema {
   attributes: {
     startDate: Schema.Attribute.Date & Schema.Attribute.Required;
     endDate: Schema.Attribute.Date & Schema.Attribute.Required;
-    dynamicText: Schema.Attribute.String & Schema.Attribute.Required;
-    staticText: Schema.Attribute.String & Schema.Attribute.Required;
+    promoMessage: Schema.Attribute.String & Schema.Attribute.Required;
+    siteTagline: Schema.Attribute.String & Schema.Attribute.Required;
     ctaText: Schema.Attribute.String & Schema.Attribute.Required;
     ctaUrl: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
@@ -641,6 +641,38 @@ export interface ApiColorColor extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::color.color'>;
+  };
+}
+
+export interface ApiHeroBannerHeroBanner extends Struct.CollectionTypeSchema {
+  collectionName: 'hero_banners';
+  info: {
+    singularName: 'hero-banner';
+    pluralName: 'hero-banners';
+    displayName: 'HeroBanner';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
+    linkText: Schema.Attribute.String & Schema.Attribute.DefaultTo<'/'>;
+    texts: Schema.Attribute.JSON;
+    linkUrl: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::hero-banner.hero-banner'
+    >;
   };
 }
 
@@ -1218,6 +1250,7 @@ declare module '@strapi/strapi' {
       'api::category.category': ApiCategoryCategory;
       'api::category-size.category-size': ApiCategorySizeCategorySize;
       'api::color.color': ApiColorColor;
+      'api::hero-banner.hero-banner': ApiHeroBannerHeroBanner;
       'api::navbar-item.navbar-item': ApiNavbarItemNavbarItem;
       'api::product.product': ApiProductProduct;
       'api::product-stock.product-stock': ApiProductStockProductStock;

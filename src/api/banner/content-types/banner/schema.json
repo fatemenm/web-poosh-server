@@ -20,11 +20,11 @@
       "type": "date",
       "required": true
     },
-    "dynamicText": {
+    "promoMessage": {
       "type": "string",
       "required": true
     },
-    "staticText": {
+    "siteTagline": {
       "type": "string",
       "required": true
     },
