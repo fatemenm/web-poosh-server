@@ -25,6 +25,11 @@
         "images",
         "files"
       ]
+    },
+    "orderNumber": {
+      "required": true,
+      "unique": true,
+      "type": "integer"
     }
   }
 }

@@ -564,6 +564,9 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     image: Schema.Attribute.Media<'images' | 'files'>;
+    orderNumber: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -608,6 +611,75 @@ export interface ApiCategorySizeCategorySize
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::category-size.category-size'
+    >;
+  };
+}
+
+export interface ApiClotheProductClotheProduct
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'clothe_products';
+  info: {
+    singularName: 'clothe-product';
+    pluralName: 'clothe-products';
+    displayName: 'ClotheProduct';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    price: Schema.Attribute.String & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::clothe-product.clothe-product'
+    >;
+  };
+}
+
+export interface ApiClotheSetBannerClotheSetBanner
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'clothe_set_banners';
+  info: {
+    singularName: 'clothe-set-banner';
+    pluralName: 'clothe-set-banners';
+    displayName: 'ClothingSetBanner';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
+    linkUrl: Schema.Attribute.String & Schema.Attribute.DefaultTo<'/'>;
+    linkText: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'\u0645\u0634\u0627\u0647\u062F\u0647 \u062C\u0632\u0626\u06CC\u0627\u062A'>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'\u0633\u062A \u062C\u062F\u06CC\u062F'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::clothe-set-banner.clothe-set-banner'
     >;
   };
 }
@@ -695,7 +767,7 @@ export interface ApiNavbarItemNavbarItem extends Struct.CollectionTypeSchema {
     isExpandable: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
-    order: Schema.Attribute.Integer & Schema.Attribute.Required;
+    orderNumber: Schema.Attribute.Integer & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1249,6 +1321,8 @@ declare module '@strapi/strapi' {
       'api::basket-item.basket-item': ApiBasketItemBasketItem;
       'api::category.category': ApiCategoryCategory;
       'api::category-size.category-size': ApiCategorySizeCategorySize;
+      'api::clothe-product.clothe-product': ApiClotheProductClotheProduct;
+      'api::clothe-set-banner.clothe-set-banner': ApiClotheSetBannerClotheSetBanner;
       'api::color.color': ApiColorColor;
       'api::hero-banner.hero-banner': ApiHeroBannerHeroBanner;
       'api::navbar-item.navbar-item': ApiNavbarItemNavbarItem;
