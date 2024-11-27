@@ -564,7 +564,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     image: Schema.Attribute.Media<'images' | 'files'>;
-    orderNumber: Schema.Attribute.Integer &
+    index: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     createdAt: Schema.Attribute.DateTime;
@@ -630,7 +630,7 @@ export interface ApiClotheProductClotheProduct
   attributes: {
     name: Schema.Attribute.String & Schema.Attribute.Required;
     price: Schema.Attribute.String & Schema.Attribute.Required;
-    image: Schema.Attribute.Media<'images' | 'files'> &
+    images: Schema.Attribute.Media<'images' | 'files', true> &
       Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -767,7 +767,7 @@ export interface ApiNavbarItemNavbarItem extends Struct.CollectionTypeSchema {
     isExpandable: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
-    orderNumber: Schema.Attribute.Integer & Schema.Attribute.Required;
+    index: Schema.Attribute.Integer & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

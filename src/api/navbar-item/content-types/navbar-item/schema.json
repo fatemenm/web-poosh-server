@@ -37,7 +37,7 @@
       "default": false,
       "required": true
     },
-    "orderNumber": {
+    "index": {
       "type": "integer",
       "required": true
     }
