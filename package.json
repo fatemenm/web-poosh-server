@@ -8,7 +8,8 @@
     "deploy": "strapi deploy",
     "develop": "strapi develop",
     "start": "strapi start",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "export": "strapi export --file my-strapi-export --no-encrypt"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.0.6",
