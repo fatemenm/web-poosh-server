@@ -6,7 +6,7 @@
   "scripts": {
     "build": "strapi build",
     "deploy": "strapi deploy",
-    "develop": "strapi develop",
+    "develop": "strapi dev",
     "start": "strapi start",
     "strapi": "strapi",
     "export": "strapi export --file my-strapi-export --no-encrypt"
