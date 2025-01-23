@@ -30,6 +30,27 @@
       "required": true,
       "unique": true,
       "type": "integer"
+    },
+    "filters": {
+      "type": "component",
+      "repeatable": true,
+      "component": "category.filter"
+    },
+    "sizeGuideImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "files",
+        "images"
+      ]
+    },
+    "sizeTable": {
+      "type": "json"
+    },
+    "careTips": {
+      "type": "json",
+      "required": false
     }
   }
 }

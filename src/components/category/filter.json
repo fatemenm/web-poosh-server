@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_category_filters",
+  "info": {
+    "displayName": "Filter",
+    "icon": "filter"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "availability",
+        "discount",
+        "size",
+        "color",
+        "style"
+      ]
+    },
+    "query": {
+      "type": "string"
+    },
+    "value": {
+      "type": "json"
+    },
+    "images": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "index": {
+      "type": "integer"
+    }
+  }
+}
