@@ -527,11 +527,6 @@ export interface ApiBasketItemBasketItem extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    product_variety_id: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::product-variety.product-variety'
-    >;
-    size_id: Schema.Attribute.Relation<'oneToOne', 'api::size.size'>;
     itemQuantity: Schema.Attribute.Integer & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -567,6 +562,10 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     index: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
+    filters: Schema.Attribute.Component<'category.filter', true>;
+    sizeGuideImage: Schema.Attribute.Media<'files' | 'images'>;
+    sizeTable: Schema.Attribute.JSON;
+    careTips: Schema.Attribute.JSON;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -578,39 +577,6 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::category.category'
-    >;
-  };
-}
-
-export interface ApiCategorySizeCategorySize
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'category_sizes';
-  info: {
-    singularName: 'category-size';
-    pluralName: 'category-sizes';
-    displayName: 'CategorySize';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    category_id: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::category.category'
-    >;
-    size_id: Schema.Attribute.Relation<'oneToOne', 'api::size.size'>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::category-size.category-size'
     >;
   };
 }
@@ -681,38 +647,6 @@ export interface ApiClotheSetBannerClotheSetBanner
       'oneToMany',
       'api::clothe-set-banner.clothe-set-banner'
     >;
-  };
-}
-
-export interface ApiColorColor extends Struct.CollectionTypeSchema {
-  collectionName: 'colors';
-  info: {
-    singularName: 'color';
-    pluralName: 'colors';
-    displayName: 'Color';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    hexCode: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique &
-      Schema.Attribute.SetMinMaxLength<{
-        minLength: 6;
-        maxLength: 6;
-      }>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::color.color'>;
   };
 }
 
@@ -796,14 +730,15 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   };
   attributes: {
     name: Schema.Attribute.String & Schema.Attribute.Required;
-    category_id: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::category.category'
-    >;
-    sub_category_id: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::sub-category.sub-category'
-    >;
+    colors: Schema.Attribute.JSON & Schema.Attribute.Required;
+    sizes: Schema.Attribute.JSON & Schema.Attribute.Required;
+    imagesByColor: Schema.Attribute.Component<'product.color-images', true> &
+      Schema.Attribute.Required;
+    basePrice: Schema.Attribute.String & Schema.Attribute.Required;
+    discountPrice: Schema.Attribute.String;
+    stocks: Schema.Attribute.JSON & Schema.Attribute.Required;
+    category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
+    information: Schema.Attribute.JSON;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -815,129 +750,6 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::product.product'
-    >;
-  };
-}
-
-export interface ApiProductStockProductStock
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'product_stocks';
-  info: {
-    singularName: 'product-stock';
-    pluralName: 'product-stocks';
-    displayName: 'ProductStock';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    product_variety_id: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::product-variety.product-variety'
-    >;
-    size_id: Schema.Attribute.Relation<'oneToOne', 'api::size.size'>;
-    stockQuantity: Schema.Attribute.Integer & Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::product-stock.product-stock'
-    >;
-  };
-}
-
-export interface ApiProductVarietyProductVariety
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'product_varieties';
-  info: {
-    singularName: 'product-variety';
-    pluralName: 'product-varieties';
-    displayName: 'ProductVariety';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    product_id: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
-    images: Schema.Attribute.Media<'images', true>;
-    color_id: Schema.Attribute.Relation<'oneToOne', 'api::color.color'>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::product-variety.product-variety'
-    >;
-  };
-}
-
-export interface ApiSizeSize extends Struct.CollectionTypeSchema {
-  collectionName: 'sizes';
-  info: {
-    singularName: 'size';
-    pluralName: 'sizes';
-    displayName: 'Size';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::size.size'>;
-  };
-}
-
-export interface ApiSubCategorySubCategory extends Struct.CollectionTypeSchema {
-  collectionName: 'sub_categories';
-  info: {
-    singularName: 'sub-category';
-    pluralName: 'sub-categories';
-    displayName: 'SubCategory';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    category_id: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::category.category'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::sub-category.sub-category'
     >;
   };
 }
@@ -1320,17 +1132,11 @@ declare module '@strapi/strapi' {
       'api::banner.banner': ApiBannerBanner;
       'api::basket-item.basket-item': ApiBasketItemBasketItem;
       'api::category.category': ApiCategoryCategory;
-      'api::category-size.category-size': ApiCategorySizeCategorySize;
       'api::clothe-product.clothe-product': ApiClotheProductClotheProduct;
       'api::clothe-set-banner.clothe-set-banner': ApiClotheSetBannerClotheSetBanner;
-      'api::color.color': ApiColorColor;
       'api::hero-banner.hero-banner': ApiHeroBannerHeroBanner;
       'api::navbar-item.navbar-item': ApiNavbarItemNavbarItem;
       'api::product.product': ApiProductProduct;
-      'api::product-stock.product-stock': ApiProductStockProductStock;
-      'api::product-variety.product-variety': ApiProductVarietyProductVariety;
-      'api::size.size': ApiSizeSize;
-      'api::sub-category.sub-category': ApiSubCategorySubCategory;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

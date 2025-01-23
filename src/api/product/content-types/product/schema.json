@@ -16,15 +16,38 @@
       "type": "string",
       "required": true
     },
-    "category_id": {
+    "colors": {
+      "type": "json",
+      "required": true
+    },
+    "sizes": {
+      "type": "json",
+      "required": true
+    },
+    "imagesByColor": {
+      "type": "component",
+      "repeatable": true,
+      "component": "product.color-images",
+      "required": true
+    },
+    "basePrice": {
+      "type": "string",
+      "required": true
+    },
+    "discountPrice": {
+      "type": "string"
+    },
+    "stocks": {
+      "type": "json",
+      "required": true
+    },
+    "category": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::category.category"
     },
-    "sub_category_id": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::sub-category.sub-category"
+    "information": {
+      "type": "json"
     }
   }
 }

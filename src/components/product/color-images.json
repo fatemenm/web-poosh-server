@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_product_color_images",
+  "info": {
+    "displayName": "colorImages",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "color": {
+      "type": "string",
+      "required": true
+    },
+    "images": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": true
+    }
+  }
+}
