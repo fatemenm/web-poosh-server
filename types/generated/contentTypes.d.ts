@@ -581,38 +581,6 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiClotheProductClotheProduct
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'clothe_products';
-  info: {
-    singularName: 'clothe-product';
-    pluralName: 'clothe-products';
-    displayName: 'ClotheProduct';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    price: Schema.Attribute.String & Schema.Attribute.Required;
-    images: Schema.Attribute.Media<'images' | 'files', true> &
-      Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::clothe-product.clothe-product'
-    >;
-  };
-}
-
 export interface ApiClotheSetBannerClotheSetBanner
   extends Struct.CollectionTypeSchema {
   collectionName: 'clothe_set_banners';
@@ -734,11 +702,11 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     sizes: Schema.Attribute.JSON & Schema.Attribute.Required;
     imagesByColor: Schema.Attribute.Component<'product.color-images', true> &
       Schema.Attribute.Required;
-    basePrice: Schema.Attribute.String & Schema.Attribute.Required;
-    discountPrice: Schema.Attribute.String;
     stocks: Schema.Attribute.JSON & Schema.Attribute.Required;
     category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
     information: Schema.Attribute.JSON;
+    originalPrice: Schema.Attribute.Integer & Schema.Attribute.Required;
+    salePrice: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1132,7 +1100,6 @@ declare module '@strapi/strapi' {
       'api::banner.banner': ApiBannerBanner;
       'api::basket-item.basket-item': ApiBasketItemBasketItem;
       'api::category.category': ApiCategoryCategory;
-      'api::clothe-product.clothe-product': ApiClotheProductClotheProduct;
       'api::clothe-set-banner.clothe-set-banner': ApiClotheSetBannerClotheSetBanner;
       'api::hero-banner.hero-banner': ApiHeroBannerHeroBanner;
       'api::navbar-item.navbar-item': ApiNavbarItemNavbarItem;
