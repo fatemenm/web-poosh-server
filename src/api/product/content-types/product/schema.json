@@ -30,13 +30,6 @@
       "component": "product.color-images",
       "required": true
     },
-    "basePrice": {
-      "type": "string",
-      "required": true
-    },
-    "discountPrice": {
-      "type": "string"
-    },
     "stocks": {
       "type": "json",
       "required": true
@@ -48,6 +41,14 @@
     },
     "information": {
       "type": "json"
+    },
+    "originalPrice": {
+      "type": "integer",
+      "required": true
+    },
+    "salePrice": {
+      "type": "integer",
+      "default": 0
     }
   }
 }
