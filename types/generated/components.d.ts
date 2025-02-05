@@ -18,14 +18,11 @@ export interface CategoryFilter extends Struct.ComponentSchema {
   info: {
     displayName: 'Filter';
     icon: 'filter';
+    description: '';
   };
   attributes: {
-    type: Schema.Attribute.Enumeration<
-      ['availability', 'discount', 'size', 'color', 'style']
-    >;
     query: Schema.Attribute.String;
-    value: Schema.Attribute.JSON;
-    images: Schema.Attribute.Media<'images' | 'files', true>;
+    image: Schema.Attribute.Media<'images' | 'files'>;
     index: Schema.Attribute.Integer;
   };
 }

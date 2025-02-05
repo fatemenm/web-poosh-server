@@ -2,33 +2,22 @@
   "collectionName": "components_category_filters",
   "info": {
     "displayName": "Filter",
-    "icon": "filter"
+    "icon": "filter",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "availability",
-        "discount",
-        "size",
-        "color",
-        "style"
-      ]
-    },
     "query": {
       "type": "string"
     },
-    "value": {
-      "type": "json"
-    },
-    "images": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "index": {
       "type": "integer"
