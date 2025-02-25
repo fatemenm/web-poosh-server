@@ -562,7 +562,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     index: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    filters: Schema.Attribute.Component<'category.filter', true>;
+    preSetFilters: Schema.Attribute.Component<'category.filter', true>;
     sizeGuideImage: Schema.Attribute.Media<'files' | 'images'>;
     sizeTable: Schema.Attribute.JSON;
     careTips: Schema.Attribute.JSON;

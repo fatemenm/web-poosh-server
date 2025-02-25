@@ -1,19 +1,5 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
-export interface CategoryFilter extends Struct.ComponentSchema {
-  collectionName: 'components_category_filters';
-  info: {
-    displayName: 'Filter';
-    icon: 'filter';
-    description: '';
-  };
-  attributes: {
-    query: Schema.Attribute.String;
-    image: Schema.Attribute.Media<'images' | 'files'>;
-    index: Schema.Attribute.Integer;
-  };
-}
-
 export interface ProductColorImages extends Struct.ComponentSchema {
   collectionName: 'components_product_color_images';
   info: {
@@ -27,11 +13,25 @@ export interface ProductColorImages extends Struct.ComponentSchema {
   };
 }
 
+export interface CategoryFilter extends Struct.ComponentSchema {
+  collectionName: 'components_category_filters';
+  info: {
+    displayName: 'Filter';
+    icon: 'filter';
+    description: '';
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images' | 'files'>;
+    index: Schema.Attribute.Integer & Schema.Attribute.Unique;
+    query: Schema.Attribute.JSON;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'category.filter': CategoryFilter;
       'product.color-images': ProductColorImages;
+      'category.filter': CategoryFilter;
     }
   }
 }

@@ -31,7 +31,7 @@
       "unique": true,
       "type": "integer"
     },
-    "filters": {
+    "preSetFilters": {
       "type": "component",
       "repeatable": true,
       "component": "category.filter"

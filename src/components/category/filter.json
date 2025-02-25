@@ -7,9 +7,6 @@
   },
   "options": {},
   "attributes": {
-    "query": {
-      "type": "string"
-    },
     "image": {
       "type": "media",
       "multiple": false,
@@ -20,7 +17,11 @@
       ]
     },
     "index": {
-      "type": "integer"
+      "type": "integer",
+      "unique": true
+    },
+    "query": {
+      "type": "json"
     }
   }
 }
