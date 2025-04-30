@@ -441,7 +441,6 @@ export interface PluginUsersPermissionsUser
     displayName: 'User';
   };
   options: {
-    timestamps: true;
     draftAndPublish: false;
   };
   attributes: {
@@ -470,6 +469,8 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    firstName: Schema.Attribute.String & Schema.Attribute.Required;
+    lastName: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -566,6 +567,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     sizeGuideImage: Schema.Attribute.Media<'files' | 'images'>;
     sizeTable: Schema.Attribute.JSON;
     careTips: Schema.Attribute.JSON;
+    products: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -702,11 +704,11 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     sizes: Schema.Attribute.JSON & Schema.Attribute.Required;
     imagesByColor: Schema.Attribute.Component<'product.color-images', true> &
       Schema.Attribute.Required;
-    stocks: Schema.Attribute.JSON & Schema.Attribute.Required;
-    category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
+    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     information: Schema.Attribute.JSON;
     originalPrice: Schema.Attribute.Integer & Schema.Attribute.Required;
-    salePrice: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    salePrice: Schema.Attribute.Integer;
+    stocks: Schema.Attribute.Relation<'oneToMany', 'api::stock.stock'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -719,6 +721,36 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::product.product'
     >;
+  };
+}
+
+export interface ApiStockStock extends Struct.CollectionTypeSchema {
+  collectionName: 'stocks';
+  info: {
+    singularName: 'stock';
+    pluralName: 'stocks';
+    displayName: 'Stock';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    quantity: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<0>;
+    size: Schema.Attribute.String;
+    color: Schema.Attribute.String;
+    product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::stock.stock'>;
   };
 }
 
@@ -1104,6 +1136,7 @@ declare module '@strapi/strapi' {
       'api::hero-banner.hero-banner': ApiHeroBannerHeroBanner;
       'api::navbar-item.navbar-item': ApiNavbarItemNavbarItem;
       'api::product.product': ApiProductProduct;
+      'api::stock.stock': ApiStockStock;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

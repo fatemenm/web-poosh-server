@@ -30,14 +30,11 @@
       "component": "product.color-images",
       "required": true
     },
-    "stocks": {
-      "type": "json",
-      "required": true
-    },
     "category": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::category.category"
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "products"
     },
     "information": {
       "type": "json"
@@ -47,8 +44,13 @@
       "required": true
     },
     "salePrice": {
-      "type": "integer",
-      "default": 0
+      "type": "integer"
+    },
+    "stocks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::stock.stock",
+      "mappedBy": "product"
     }
   }
 }

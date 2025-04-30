@@ -2,6 +2,13 @@
  * product controller
  */
 
-import { factories } from '@strapi/strapi'
+import { factories } from "@strapi/strapi";
 
-export default factories.createCoreController('api::product.product');
+type Stock = {
+  id: number;
+  size: string;
+  color: string;
+  quantity: number;
+};
+
+export default factories.createCoreController("api::product.product");

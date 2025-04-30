@@ -51,6 +51,12 @@
     "careTips": {
       "type": "json",
       "required": false
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product",
+      "mappedBy": "category"
     }
   }
 }
