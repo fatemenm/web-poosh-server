@@ -469,8 +469,7 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    firstName: Schema.Attribute.String & Schema.Attribute.Required;
-    lastName: Schema.Attribute.String & Schema.Attribute.Required;
+    size: Schema.Attribute.Relation<'oneToOne', 'api::user-size.user-size'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -751,6 +750,46 @@ export interface ApiStockStock extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::stock.stock'>;
+  };
+}
+
+export interface ApiUserSizeUserSize extends Struct.CollectionTypeSchema {
+  collectionName: 'user_sizes';
+  info: {
+    singularName: 'user-size';
+    pluralName: 'user-sizes';
+    displayName: 'UserSize';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    height: Schema.Attribute.Integer & Schema.Attribute.Required;
+    weight: Schema.Attribute.Integer & Schema.Attribute.Required;
+    user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    shoulderWidth: Schema.Attribute.Integer;
+    chestWidth: Schema.Attribute.Integer;
+    waistWidth: Schema.Attribute.Integer;
+    pantsLength: Schema.Attribute.Integer;
+    thighWidth: Schema.Attribute.Integer;
+    hemWidth: Schema.Attribute.Integer;
+    footSize: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-size.user-size'
+    >;
   };
 }
 
@@ -1137,6 +1176,7 @@ declare module '@strapi/strapi' {
       'api::navbar-item.navbar-item': ApiNavbarItemNavbarItem;
       'api::product.product': ApiProductProduct;
       'api::stock.stock': ApiStockStock;
+      'api::user-size.user-size': ApiUserSizeUserSize;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

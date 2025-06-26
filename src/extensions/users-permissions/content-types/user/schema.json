@@ -65,13 +65,11 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "firstName": {
-      "type": "string",
-      "required": true
-    },
-    "lastName": {
-      "type": "string",
-      "required": true
+    "size": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::user-size.user-size",
+      "mappedBy": "user"
     }
   }
 }

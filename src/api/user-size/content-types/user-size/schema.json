@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_sizes",
+  "info": {
+    "singularName": "user-size",
+    "pluralName": "user-sizes",
+    "displayName": "UserSize",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "height": {
+      "type": "integer",
+      "required": true
+    },
+    "weight": {
+      "type": "integer",
+      "required": true
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "size"
+    },
+    "shoulderWidth": {
+      "type": "integer"
+    },
+    "chestWidth": {
+      "type": "integer"
+    },
+    "waistWidth": {
+      "type": "integer"
+    },
+    "pantsLength": {
+      "type": "integer"
+    },
+    "thighWidth": {
+      "type": "integer"
+    },
+    "hemWidth": {
+      "type": "integer"
+    },
+    "footSize": {
+      "type": "integer"
+    }
+  }
+}
