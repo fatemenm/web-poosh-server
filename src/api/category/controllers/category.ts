@@ -10,19 +10,27 @@ export default factories.createCoreController(
     async getAvailableOptions(ctx) {
       ctx.body = {
         data: {
-          sizes: ["31", "32", "33", "34", "M", "L", "XL"],
+          sizes: ["31", "32", "33", "34", "40", "41", "M", "L", "XL"],
           colors: [
             {
-              name: "آبی تیره",
-              hexCode: "#5B6B80",
+              name: "آبی خیلی تیره",
+              hexCode: "#071f35",
             },
             {
-              name: "آبی",
-              hexCode: "#5F8099",
+              name: "آبی تیره",
+              hexCode: "#24496b",
+            },
+            {
+              name: "آبی متوسط",
+              hexCode: "#446d92",
             },
             {
               name: "آبی روشن",
-              hexCode: "#A2A9A7",
+              hexCode: "#98b1c8",
+            },
+            {
+              name: "آبی خیلی روشن",
+              hexCode: "#f7fafe",
             },
             {
               name: "سبز",
@@ -33,8 +41,16 @@ export default factories.createCoreController(
               hexCode: "#17202a",
             },
             {
-              name: "سورمه ای",
-              hexCode: "#1f618d",
+              name: "سفید",
+              hexCode: "#ffffff",
+            },
+            {
+              name: "قهوه‌ای",
+              hexCode: "#a97f50",
+            },
+            {
+              name: "زرشکی تیره",
+              hexCode: "#9F6E6A",
             },
           ],
         },
